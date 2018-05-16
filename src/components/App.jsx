@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Clock from './Clock';
 import Stopwatch from './Stopwatch';
-import "./App.css";
+import "../App.css";
 import { Form, FormControl, Button } from 'react-bootstrap';
 
 class App extends Component {
@@ -24,13 +24,13 @@ class App extends Component {
   }
 
   startStopwatch() {
+    /*convert minutes and seconds to milliseconds,
+    add that to current time and save the sum to the state*/
     this.setState({
       time: (this.state.min*60 + Number(this.state.sec))*1000
     }, function() {
       const endTime = new Date().getTime() + this.state.time;
-      this.setState({endTime: endTime}, function() {
-          console.log(this.state.endTime);
-      });
+      this.setState({endTime: endTime});
     });
   }
 

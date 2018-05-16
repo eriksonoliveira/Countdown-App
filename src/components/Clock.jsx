@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 
 class Clock extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class Clock extends Component {
   }
 
   leading0(num) {
-    return num < 10 ? '0' + num : num; //Using ternary expression to shorten conditional
+    //Add leding 0 if the number is less than 10 so that the html element does not change width
+    return num < 10 ? '0' + num : num; 
   }
 
   getTimeUntil(deadline) {
