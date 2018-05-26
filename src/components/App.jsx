@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Clock from './Clock';
 import Timer from './Timer';
 import Stopwatch from './Stopwatch';
-import "../App.css";
-import { Form, FormControl, Button } from 'react-bootstrap';
+import '../App.css';
+import { Grid, Form, FormControl, Button } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Grid className="App">
 
         <div className="countdown">
           <h3 className="section-title">
@@ -78,7 +78,7 @@ class App extends Component {
           </h3>
           <Stopwatch />
         </div>
-      </div>
+      </Grid>
     );
   }
 }
