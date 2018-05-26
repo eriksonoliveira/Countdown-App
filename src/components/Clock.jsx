@@ -39,7 +39,7 @@ class Clock extends Component {
     } else {
       this.setState({days: 0, hours: 0, minutes: 0, seconds: 0});
     }
-    //If the state propertie and the variable have the same name it tis allowed to write
+    //If the state properties and the variables have the same name it tis allowed to write
     //the name only once
   }
 
