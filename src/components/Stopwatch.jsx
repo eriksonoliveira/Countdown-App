@@ -1,50 +1,75 @@
 import React, { Component } from 'react';
-import '../App.css';
+import { Button } from 'react-bootstrap';
 
 class Stopwatch extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      minutes: 0,
-      seconds: 0,
+      minutes :0,
+      seconds :0,
+      milliseconds: 0,
+      t: 0,
+      buttonLabel: 'Start'
+    }
+
+    this.timer = null;
+  }
+
+  start() {
+    if(this.timer != null) {
+      //stop this.timer
+      clearInterval(this.timer);
+      this.timer = null;
+      this.setState({buttonLabel: 'Start'});
+    } else {
+
+      this.timer = setInterval(() => {
+        let t = this.state.t;
+        t += 1;
+
+        const milliseconds = Math.floor(t % 10);
+        const seconds = Math.floor((t/10) % 60);
+        const minutes = Math.floor(t/(10 * 60));
+
+        const buttonLabel = 'Stop';
+
+        this.setState({t, milliseconds, seconds, minutes, buttonLabel});
+      }, 100);
     }
   }
 
-  componentWillMount() {
-    this.getTimeUntilZero(this.props.time, this.props.endTime);
-  }
+  stop() {
+    if(this.timer != null) {
+      //stop this.timer
+      clearInterval(this.timer);
+      this.timer = null;
+    }
 
-  componentDidMount() {
-    setInterval(() => this.getTimeUntilZero(this.props.time, this.props.endTime), 1000);
-    //After the first run, run the method again every second
+    const milliseconds = 0;
+    const seconds = 0;
+    const minutes = 0;
+    const t = 0;
+
+    this.setState({t, milliseconds, seconds, minutes});
   }
 
   leading0(num) {
     return num < 10 ? '0' + num : num; //Using ternary expression to shorten conditional
   }
 
-  getTimeUntilZero(time, endTime) {
-    const currTime = new Date().getTime();
-    const timeDiff = endTime - currTime;
-
-    if(timeDiff > 0) {
-      console.log(timeDiff);
-
-      const seconds = Math.floor((timeDiff/1000) % 60);
-      const minutes = Math.floor(timeDiff/(1000 * 60));
-
-      this.setState({minutes, seconds});
-    } else {
-      this.setState({minutes: 0, seconds: 0});
-    }
-  }
-
   render() {
     return(
       <div>
-        <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
-        :
-        <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
+        <div className="stopwatch-time">
+          {this.leading0(this.state.minutes)}
+          :
+          {this.leading0(this.state.seconds)}
+          :
+          {this.state.milliseconds}
+        </div>
+        <Button onClick={() => this.start()}>{this.state.buttonLabel}</Button>
+        <Button onClick={() => this.stop()}>Reset</Button>
       </div>
     );
   }
