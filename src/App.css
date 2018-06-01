@@ -1,11 +1,32 @@
+body, html {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root, .content-wrap {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.content-wrap {
+  transition: .6s;
+  background: url(images/background.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
-  font-size: 35px;
-  margin-top: 20%;
+  font-size: 3.5rem;
+  color: #212121;
+  z-index: 100;
 }
 
 .section-title {
-  font-size: 50px;
+  font-size: 5rem;
 }
 
 .clock-days,
@@ -19,4 +40,82 @@
 .Deadline-input {
   font-size: 25px;
   margin: 5px;
+}
+
+.Tabs {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tab {
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 0 10px;
+  border-radius: 5px;
+  transition: all .2s;
+}
+
+.tab:hover {
+  background-color: rgba(150, 150, 150, .4);
+}
+
+.tab-active {
+  background-color: rgba(200, 200, 200, .4);
+}
+
+.countdown-bg {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0; right: 0; left: 0;
+  background: inherit;
+  overflow: hidden;
+  transition: inherit;
+  transform: scale(1.3) translateX(70px);
+}
+
+.timer-bg {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0; right: 0; left: 0;
+  background: inherit;
+  overflow: hidden;
+  transition: inherit;
+  transform: scale(1.3) translateX(0px);
+}
+
+.stopwatch-bg {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0; right: 0; left: 0;
+  background: inherit;
+  overflow: hidden;
+  transition: inherit;
+  transform: scale(1.3) translateX(-70px);
+}
+
+/*On small screens*/
+@media only screen and (max-width: 768px) {
+  .App {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 3.5rem;
+  }
+
+  .countdown-bg {
+    transform: scale(1.35) translateX(50px);
+  }
+
+  .timer-bg {
+    transform: scale(1.35) translateX(0px);
+  }
+
+  .stopwatch-bg {
+    transform: scale(1.35) translateX(-50px);
+  }
+
 }
