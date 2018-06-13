@@ -43,7 +43,7 @@ class App extends Component {
     let backgroundClass = `${this.state.active}-bg`;
 
     return (
-      <div className={`content-wrap `}>
+      <div className={`content-wrap`}>
 
         <div className={backgroundClass}></div>
         <Grid className="App">
