@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Clock from './Clock';
+
+/* import Clock from './Clock';
 import Timer from './Timer';
 import Stopwatch from './Stopwatch';
-import Tabs from './Tabs';
+import Tabs from './Tabs'; */
+import Main from './Main';
+
 import '../App.css';
 import { Grid, Form, FormControl, Button } from 'react-bootstrap';
 
@@ -11,7 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       deadline: "December 25, 2018",
-      newDeadlilne: '',
+      newDeadline: '',
       min: 0,
       sec: 0,
       time: 0,
@@ -27,9 +30,14 @@ class App extends Component {
     });
   }
 
+  //Handle change in form
+  handleChangeForm(evt) {
+    this.setState({[evt.target.name]: evt.target.value});
+  }
+
+  /*convert minutes and seconds to milliseconds,
+  add that to current time and save the sum to the state*/
   handleStartTimer() {
-    /*convert minutes and seconds to milliseconds,
-    add that to current time and save the sum to the state*/
     this.setState({
       time: (this.state.min*60 + Number(this.state.sec))*1000
     }, () => {
@@ -38,12 +46,29 @@ class App extends Component {
     });
   }
 
+  //Handle change in active tab
+  handleChangeTab(active) {
+    this.setState({active});
+  }
+
+
   render() {
 
     let backgroundClass = `${this.state.active}-bg`;
 
     return (
-      <div className={`content-wrap`}>
+
+      <Main 
+        {...this.state}
+        {...this.props}
+        /* handleChangeTab={this.handleChangeTab}
+        background={backgroundClass}
+        handleChangeDeadline={this.handleChangeDeadline}
+        handleChangeForm={this.handleChangeForm}
+        handleStartTimer={this.handleStartTimer} */
+      />);
+
+      /* <div className={`content-wrap`}>
 
         <div className={backgroundClass}></div>
         <Grid className="App">
@@ -117,8 +142,8 @@ class App extends Component {
             }
           </div>
         </Grid>
-      </div>
-    );
+      </div> */
+    //);
   }
 }
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import '../App.css';
+import { Form, FormControl, Button } from 'react-bootstrap';
 
 class Timer extends Component {
   constructor(props) {
@@ -41,9 +43,24 @@ class Timer extends Component {
   render() {
     return(
       <div>
-        <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
-        :
-        <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
+        <div className="timer">
+          <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
+          :
+          <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
+        </div>
+        <Form inline>
+          <FormControl  className='Timer-input min'
+            placeholder="min"
+            name="min"
+            onChange={event => this.props.handleChangeForm(event)}
+          />
+          <FormControl  className='Timer-input sec'
+          placeholder="sec"
+          name="min"
+          onChange={event => this.props.handleChangeForm(event)}
+          />
+          <Button onClick={() => this.props.handleStartTimer()}>Start</Button>
+        </Form>
       </div>
     );
   }

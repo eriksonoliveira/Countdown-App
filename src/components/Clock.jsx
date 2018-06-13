@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import '../App.css';
+import { Form, FormControl, Button } from 'react-bootstrap';
 
 class Clock extends Component {
   constructor(props) {
@@ -39,17 +41,28 @@ class Clock extends Component {
     } else {
       this.setState({days: 0, hours: 0, minutes: 0, seconds: 0});
     }
-    //If the state properties and the variables have the same name it tis allowed to write
-    //the name only once
   }
 
   render() {
     return(
       <div>
-        <div className="clock-days">{this.leading0(this.state.days)} days</div>
-        <div className="clock-hours">{this.leading0(this.state.hours)} Hours</div>
-        <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
-        <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
+        <div className="clock">
+          <div className="clock-days">{this.leading0(this.state.days)} days</div>
+          <div className="clock-hours">{this.leading0(this.state.hours)} Hours</div>
+          <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
+          <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
+        </div>
+        <Form inline>
+          <FormControl className="Deadline-input"
+            placeholder="new date"
+            name="newDeadline"
+            // onChange={event => this.setState({newDeadline: event.target.value})}
+            onChange={event => this.props.handleChangeForm(event)}
+          />
+          <Button onClick={() => this.props.handleChangeDeadline()}>
+            Submit
+          </Button>
+        </Form>
       </div>
     );
   }
