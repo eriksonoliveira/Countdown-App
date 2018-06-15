@@ -6,6 +6,7 @@ import Stopwatch from './Stopwatch/index';
 import Tabs from './Tabs';
 
 import '../App.css';
+import video from '../videos/bg-video.mp4';
 import { Grid } from 'react-bootstrap';
 
 class Main extends Component {
@@ -74,8 +75,9 @@ class Main extends Component {
           </div>
         </Grid>
 
-        <video autoplay muted loop id="bgVideo">
-          <source src="../videos/bg-video.mp4" type="video/mp4"/>
+        <video autoPlay muted loop id="bgVideo">
+          {/* <source src="https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4"/> */}
+          <source src={video}/>
         </video>
       </div>
     );
