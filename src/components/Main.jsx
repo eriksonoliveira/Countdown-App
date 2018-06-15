@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 
-import Clock from './Clock';
-import Timer from './Timer';
-import Stopwatch from './Stopwatch';
+import Clock from './Clock/index';
+import Timer from './Timer/index';
+import Stopwatch from './Stopwatch/index';
 import Tabs from './Tabs';
 
 import '../App.css';
-// import { Grid, Form, FormControl, Button } from 'react-bootstrap';
 import { Grid } from 'react-bootstrap';
 
-// class App extends Component {
-const Main = props => {    
-
-  //render() {
-
-    //let backgroundClass = `${this.props.active}-bg`;
-
+class Main extends Component {
+  render() {
     return (
       <div className={`content-wrap`}>
 
@@ -25,7 +19,7 @@ const Main = props => {
           {/* Tabs Component */}
           <Tabs
             active={this.props.active}
-            onChange={this.props.handleChangeTab}
+            handleChange={this.props.handleChangeTab}
           >
             <div key="countdown">Countdown</div>
             <div key="timer">Timer</div>
@@ -47,16 +41,6 @@ const Main = props => {
                     handleChangeDeadline={this.props.handleChangeDeadline}
                     handleChangeForm={this.props.handleChangeForm}
                   />
-
-                  {/* <Form inline>
-                    <FormControl className="Deadline-input"
-                      placeholder="new date"
-                      onChange={event => this.setState({newDeadline: event.target.value})}
-                    />
-                    <Button onClick={() => this.handleChangeDeadline()}>
-                      Submit
-                    </Button>
-                  </Form> */}
                 </div>
                 : null
             }
@@ -67,21 +51,11 @@ const Main = props => {
                   <h3 className="section-title">
                     Timer
                   </h3>
-                  {/* <Form inline>
-                    <FormControl  className='Timer-input min'
-                      placeholder="min"
-                      onChange={event => this.setState({min: event.target.value})}
-                    />
-                    <FormControl  className='Timer-input sec'
-                    placeholder="sec"
-                    onChange={event => this.setState({sec: event.target.value})}
-                    />
-                    <Button onClick={() => this.handleStartTimer()}>Start</Button>
-                  </Form> */}
                   <Timer
                     time={this.props.time}
                     endTime={this.props.endTime}
                     handleChangeForm={this.props.handleChangeForm}
+                    handleStartTimer={this.props.handleStartTimer}
                   />
                 </div>
                 : null
@@ -101,7 +75,7 @@ const Main = props => {
         </Grid>
       </div>
     );
-  //}
+  }
 }
 
-export default App;
+export default Main;

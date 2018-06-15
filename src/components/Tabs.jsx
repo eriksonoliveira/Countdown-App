@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Tabs extends Component {
 
   render() {
+    console.log(this.props);
     return(
       <div className="Tabs">
         {
@@ -15,9 +16,7 @@ class Tabs extends Component {
             return(
               <div
                 className={className}
-                onClick={() => {
-                  this.props.onChange(child.key);
-                }}
+                onClick={() => this.props.handleChange(child.key)}
               >
                 {child}
               </div>

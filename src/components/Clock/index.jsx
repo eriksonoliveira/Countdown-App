@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '../App.css';
+import '../../App.css';
 import { Form, FormControl, Button } from 'react-bootstrap';
 
 class Clock extends Component {
@@ -60,7 +60,7 @@ class Clock extends Component {
             onChange={event => this.props.handleChangeForm(event)}
           />
           <Button onClick={() => this.props.handleChangeDeadline()}>
-            Submit
+            Change
           </Button>
         </Form>
       </div>
