@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import '../../App.css';
 import { Button } from 'react-bootstrap';
 
 class Stopwatch extends Component {
@@ -60,7 +62,7 @@ class Stopwatch extends Component {
 
   render() {
     return(
-      <div>
+      <div className="margin-top">
         <div className="stopwatch-time">
           {this.leading0(this.state.minutes)}
           :
@@ -68,7 +70,7 @@ class Stopwatch extends Component {
           :
           {this.state.milliseconds}
         </div>
-        <Button onClick={() => this.start()}>{this.state.buttonLabel}</Button>
+        <Button className="margin-right" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
         <Button onClick={() => this.stop()}>Reset</Button>
       </div>
     );

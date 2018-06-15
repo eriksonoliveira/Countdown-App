@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 import '../../App.css';
+import '../../progressBar.css';
 import { Form, FormControl, Button } from 'react-bootstrap';
+import CircularProgressbar from 'react-circular-progressbar';
 
 class Timer extends Component {
   constructor(props) {
@@ -13,11 +15,13 @@ class Timer extends Component {
       sec: 0,
       time: 0,
       endTime: 0,
+      percentage: 0,
       clockRunning: false
     }
 
     this.showClock = this.showClock.bind(this);
     this.hideClock = this.hideClock.bind(this);
+    this.cancel = this.cancel.bind(this);
     this.handleChangeForm = this.handleChangeForm.bind(this);
     this.handleStartTimer = this.handleStartTimer.bind(this);
   }
@@ -27,8 +31,8 @@ class Timer extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 1000);
     //After the first run, run the method again every second
+    setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 1000);
   }
 
   //Handle change in form
@@ -55,23 +59,23 @@ class Timer extends Component {
   getTimeUntilZero(time, endTime) {
     const currTime = new Date().getTime();
     const timeDiff = endTime - currTime;
+    const percentage = Math.floor( (1 - (timeDiff / time)) * 100);
 
     if(timeDiff > 0) {
 
       const seconds = Math.floor((timeDiff/1000) % 60);
       const minutes = Math.floor(timeDiff/(1000 * 60));
 
-      this.setState({minutes, seconds});
+      this.setState({minutes, seconds, percentage});
     } else {
-      this.setState({minutes: 0, seconds: 0});
+      this.setState({minutes: 0, seconds: 0, percentage});
     }
   }
 
   showClock() {
-        this.setState({
+      this.setState({
         clockRunning: true
       });
-      console.log(this.state.clockRunning);
   }
 
   hideClock() {
@@ -82,19 +86,17 @@ class Timer extends Component {
 
   cancel() {
     const currTime = new Date().getTime();
-    this.setState({endTime: currTime});
+    this.setState({minutes: 0, seconds: 0, min: 0, sec: 0, endTime: currTime});
     this.hideClock();
   }
 
   render() {
-
     return(
-      <div>
-        
-        {this.state.clockRunning ? 
-        <div>
-          <div className="timer">
-          {/* <div className={`${this.state.visibility} timer`}> */}
+      <div className="margin-top">
+      {
+          this.state.clockRunning ? 
+        <div className="timer-clock">
+          <div className="timer-clock-content">
             <div className="clock-minutes">
               {this.leading0(this.state.minutes)}
             </div>
@@ -102,31 +104,36 @@ class Timer extends Component {
             <div className="clock-seconds">
               {this.leading0(this.state.seconds)}
             </div>
+            <Button className="cancelTimer" onClick={() => this.cancel()}>Cancel</Button>
           </div>
-          <Button onClick={() => this.cancel()}>Cancel</Button>
+          <div className="progressBar">
+            <CircularProgressbar 
+              percentage={this.state.percentage}
+              strokeWidth={4}
+              textForPercentage={null}
+            />
+          </div>
         </div>
-        : null}
+        : null
+      }
 
-        {
-          this.state.clockRunning ? null
-          :
+      {
+        this.state.clockRunning ? null
+        :
         <Form inline>
-      {/*<FormControl  className={`${isVisible} Timer-input min`}*/}
-          <FormControl  className='Timer-input min'
-            // placeholder="min"
+          <FormControl  className='timer-input margin-right min'
             placeholder={this.leading0(this.state.minutes)}
             name="min"
             onChange={event => this.handleChangeForm(event)}
             />
-          {/* <FormControl  className={`${isVisible} Timer-input sec`} */}
-          <FormControl  className='Timer-input sec'
+          <FormControl  className='timer-input margin-right sec'
           placeholder={this.leading0(this.state.seconds)}
           name="sec"
           onChange={event => this.handleChangeForm(event)}
           />
-          <Button onClick={() => this.handleStartTimer()}>Start</Button>
+          <Button className="startTimer" onClick={() => this.handleStartTimer()}>Start</Button>
         </Form>
-        }
+      }
       </div>
     );
   }

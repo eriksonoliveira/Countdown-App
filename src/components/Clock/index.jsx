@@ -53,7 +53,8 @@ class Clock extends Component {
           <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
         </div>
         <Form inline>
-          <FormControl className="Deadline-input"
+          <FormControl 
+            className="Deadline-input margin-right"
             placeholder="new date"
             name="newDeadline"
             // onChange={event => this.setState({newDeadline: event.target.value})}

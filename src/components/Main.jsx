@@ -31,9 +31,9 @@ class Main extends Component {
             {
               this.props.active === 'countdown' ?
                 <div key="countdown" className="countdown content-inner">
-                  <h3 className="section-title">
+                  <h4 className="section-title">
                     Countdown to {this.props.deadline}
-                  </h3>
+                  </h4>
 
                   {/* Clock Component */}
                   <Clock
@@ -48,9 +48,9 @@ class Main extends Component {
             {
               this.props.active === 'timer' ?
                 <div key="timer" className="timer">
-                  <h3 className="section-title">
+                  {/* <h3 className="section-title">
                     Timer
-                  </h3>
+                  </h3> */}
                   <Timer
                     time={this.props.time}
                     endTime={this.props.endTime}
@@ -64,15 +64,19 @@ class Main extends Component {
             {
               this.props.active === 'stopwatch' ?
                 <div key="stopwatch" className="stopwatch">
-                  <h3 className="section-title">
+                  {/* <h3 className="section-title">
                     Stopwatch
-                  </h3>
+                  </h3> */}
                   <Stopwatch />
                 </div>
                 : null
             }
           </div>
         </Grid>
+
+        <video autoplay muted loop id="bgVideo">
+          <source src="../videos/bg-video.mp4" type="video/mp4"/>
+        </video>
       </div>
     );
   }
