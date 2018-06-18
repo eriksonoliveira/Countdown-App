@@ -1,3 +1,5 @@
+ ## Clock App
+ 
  An app built with React.js that consists of a countdown to a user specified date, 
  a timer and a stopwatch.
  
