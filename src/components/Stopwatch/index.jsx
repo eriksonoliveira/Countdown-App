@@ -62,7 +62,7 @@ class Stopwatch extends Component {
 
   render() {
     return(
-      <div className="margin-top">
+      <div>
         <div className="stopwatch-time">
           {this.leading0(this.state.minutes)}
           :
@@ -70,8 +70,8 @@ class Stopwatch extends Component {
           :
           {this.state.milliseconds}
         </div>
-        <Button className="margin-right" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
-        <Button onClick={() => this.stop()}>Reset</Button>
+        <Button className="margin-right timer-btn" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
+        <Button className="timer-btn" onClick={() => this.stop()}>Reset</Button>
       </div>
     );
   }

@@ -14,7 +14,6 @@ class Main extends Component {
     return (
       <div className={`content-wrap`}>
 
-        <div className={`${this.props.active}-bg`}></div>
         <Grid className="App">
 
           {/* Tabs Component */}
@@ -28,10 +27,10 @@ class Main extends Component {
           </Tabs>
 
           {/* Render Components according to this.props.active */}
-          <div className="content">
+          <div className="content d-flex justify-content-center mt-5">
             {
               this.props.active === 'countdown' ?
-                <div key="countdown" className="countdown content-inner">
+                <div key="countdown" className="countdown content-inner mt-3">
                   <h4 className="section-title">
                     Countdown to {this.props.deadline}
                   </h4>
@@ -48,7 +47,7 @@ class Main extends Component {
 
             {
               this.props.active === 'timer' ?
-                <div key="timer" className="timer">
+                <div key="timer" className="timer mt-3">
                   {/* <h3 className="section-title">
                     Timer
                   </h3> */}
@@ -64,7 +63,7 @@ class Main extends Component {
 
             {
               this.props.active === 'stopwatch' ?
-                <div key="stopwatch" className="stopwatch">
+                <div key="stopwatch" className="stopwatch mt-3">
                   {/* <h3 className="section-title">
                     Stopwatch
                   </h3> */}

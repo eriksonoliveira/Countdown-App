@@ -104,7 +104,7 @@ class Timer extends Component {
             <div className="clock-seconds">
               {this.leading0(this.state.seconds)}
             </div>
-            <Button className="cancelTimer" onClick={() => this.cancel()}>Cancel</Button>
+            <Button className="cancelTimer timer-btn" onClick={() => this.cancel()}>Cancel</Button>
           </div>
           <div className="progressBar">
             <CircularProgressbar 
@@ -131,7 +131,7 @@ class Timer extends Component {
           name="sec"
           onChange={event => this.handleChangeForm(event)}
           />
-          <Button className="startTimer" onClick={() => this.handleStartTimer()}>Start</Button>
+          <Button className="startTimer timer-btn" onClick={() => this.handleStartTimer()}>Start</Button>
         </Form>
       }
       </div>

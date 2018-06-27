@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class Tabs extends Component {
 
   render() {
-    console.log(this.props);
     return(
-      <div className="Tabs">
+      <div className="Tabs d-flex justify-content-around">
         {
           //render the children
           React.Children.map(this.props.children, child => {

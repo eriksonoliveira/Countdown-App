@@ -52,7 +52,7 @@ class Clock extends Component {
           <div className="clock-minutes">{this.leading0(this.state.minutes)}</div>
           <div className="clock-seconds">{this.leading0(this.state.seconds)}</div>
         </div>
-        <Form inline>
+        <Form inline bsClass="d-flex justify-content-center">
           <FormControl 
             className="Deadline-input margin-right"
             placeholder="new date"
