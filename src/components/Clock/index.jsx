@@ -60,7 +60,7 @@ class Clock extends Component {
             // onChange={event => this.setState({newDeadline: event.target.value})}
             onChange={event => this.props.handleChangeForm(event)}
           />
-          <Button onClick={() => this.props.handleChangeDeadline()}>
+          <Button className="clock-btn" onClick={() => this.props.handleChangeDeadline()}>
             Change
           </Button>
         </Form>
