@@ -60,7 +60,7 @@ class Clock extends Component {
         </div>
         <Form inline bsClass="d-flex justify-content-center">
           <FormControl 
-            className="Deadline-input margin-right"
+            className="Deadline-input"
             placeholder="new date"
             name="newDeadline"
             // onChange={event => this.setState({newDeadline: event.target.value})}

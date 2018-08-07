@@ -57,12 +57,12 @@ video {
 .tab {
   cursor: pointer;
   margin: 0 25px;
-  padding: 0 10px;
-  border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
   transition: all .2s;
   font-weight: bold;
   display: inline-block;
-  /* max-width: 250px; */
+  /* color: #333; */
 }
 
 .tab:hover {
@@ -70,13 +70,14 @@ video {
 }
 
 .tab-active {
-  background-color: rgba(221, 221, 221, 0.9);
+  background-color: rgba(221, 221, 221, 0.4);
+  border: 1px solid #333;
   transform: scale(1.1);
   color: #FFF;
 }
 
 .tab-active:hover {
-  background-color: rgba(221, 221, 221, 0.9);
+  background-color: rgba(221, 221, 221, 0.4);
 }
 
 .section-title {
@@ -101,24 +102,26 @@ video {
 
 input {
   background-color: rgba(221, 221, 221, 0.7) !important;
-  border: 2px solid #DDD !important;
+  border: 1px solid #333 !important;
   color: #222 !important;
 }
 
 button {
   font-size: 1.5rem !important;
+  border: 1px solid #333 !important;
 }
 
 .Deadline-input {
-  height: 3.5rem;
-  font-size: 1.5rem !important;
+  height: 4.5rem;
+  font-size: 2rem !important;
   padding-left: 1.5rem !important;
 }
 
 .timer-input {
-  width: 4.5rem !important;
-  height: 3.5rem;
-  font-size: 1.5rem !important;
+  width: 6rem !important;
+  height: 7rem;
+  font-size: 3.7rem !important;
+  display: inline !important;
 }
 
 ::placeholder {
@@ -164,21 +167,30 @@ button {
 }
 
 .timer .form-control {
-  display: inline;
+  /* display: inline; */
 }
 
 .cancelTimer {
   display: block !important;
   margin: auto;
-  color: red;
+  color: rgb(212, 0, 0);
+  padding: 8px 35px !important;
+  background-color: transparent;
+  border: 2px solid rgb(212, 0, 0) !important;
+}
+
+.cancelTimer:hover {
+  background-color: rgb(212, 0, 0);
+  color: white;
 }
 
 .startTimer {
+  /* width: 200px; */
+  padding: 10px 90px !important;
   color: green;
-}
-
-.timer-btn {
-  padding: 0.6rem 1.3rem !important;
+  display: block !important;
+  font-size: 1.8rem;
+  margin-top: 40px;
 }
 
 .progressBar {
@@ -187,7 +199,11 @@ button {
 }
 
 .stopwatch-time {
-  font-size: 3.5rem !important;
+  font-size: 3.7rem !important;
+}
+
+.stopwatch-start, .stopwatch-reset {
+  padding: 8px 35px !important;
 }
 
 /*On medium screens*/
@@ -211,11 +227,7 @@ button {
   .content-wrap {
     /* background: url(images/bg_leaves.jpg);
     background-size: cover; */
-    padding-top: 50px;
-  }
-
-  video {
-    display: none;
+    padding-top: 30px;
   }
 
   .App {

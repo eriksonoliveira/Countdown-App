@@ -142,13 +142,13 @@ class Timer extends Component {
       {
         this.state.clockRunning ? null
         :
-        <Form inline>
+        <Form>
           <FormControl  className='timer-input margin-right min'
             placeholder={this.leading0(this.state.minutes)}
             name="min"
             onChange={event => this.handleChangeForm(event)}
             />
-          <FormControl  className='timer-input margin-right sec'
+          <FormControl  className='timer-input sec'
           placeholder={this.leading0(this.state.seconds)}
           name="sec"
           onChange={event => this.handleChangeForm(event)}

@@ -30,9 +30,10 @@ const Main = (props) => {
             {
               props.active === 'countdown' ?
                 <div key="countdown" className="countdown content-inner mt-3">
-                  <h4 className="section-title">
-                    Countdown to {props.deadline}
-                  </h4>
+                  <div className="section-title">
+                    Countdown to
+                  </div>
+                  <div>{props.deadline}</div>
 
                   {/* Clock Component */}
                   <Clock
@@ -73,10 +74,10 @@ const Main = (props) => {
           </div>
         </Grid>
 
-        <video autoPlay muted loop id="bgVideo">
+        {/* <video autoPlay muted loop id="bgVideo">*/}
           {/* <source src="https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4"/> */}
-          <source src={video}/>
-        </video>
+          {/*<source src={video}/>
+        </video> */}
       </div>
     );
 }

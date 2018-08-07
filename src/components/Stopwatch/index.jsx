@@ -71,8 +71,8 @@ class Stopwatch extends Component {
           :
           {this.leading0(this.state.deciseconds)}
         </div>
-        <Button className="margin-right timer-btn" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
-        <Button className="timer-btn" onClick={() => this.reset()}>Reset</Button>
+        <Button className="margin-right stopwatch-start" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
+        <Button className="timer-btn stopwatch-reset" onClick={() => this.reset()}>Reset</Button>
       </div>
     );
   }
