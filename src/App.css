@@ -14,10 +14,16 @@ body, html {
 .content-wrap {
   transition: .6s;
   /* background: url(images/background.jpg); */
-  background-color: transparent;
-  background-size: cover;
+  background-color: #3e7dd2;
+  /* background-color: transparent; */
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   position: relative;
+}
+
+video {
+  display: none;
 }
 
 #bgVideo {
@@ -26,12 +32,16 @@ body, html {
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  background-size: cover;
 }
 
 .App {
   height: 350px;
   text-align: center;
-  font-size: 3rem;
+  font-size: 3.8rem;
   color: #dddddd;
   text-shadow: 2px 2px 3px #555;
   z-index: 100;
@@ -196,15 +206,24 @@ button {
 @media only screen and (max-width: 570px) {
   #root, .content-wrap {
     align-items: start;
-    padding-top: 1rem;
+  }
+  
+  .content-wrap {
+    /* background: url(images/bg_leaves.jpg);
+    background-size: cover; */
+    padding-top: 50px;
+  }
+
+  video {
+    display: none;
   }
 
   .App {
-    font-size: 1.1rem;
+    font-size: 1.7rem;
   }
 
   button {
-    font-size: 1rem !important;
+    font-size: 1.5rem !important;
   }
 
   .tab {
@@ -212,24 +231,24 @@ button {
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }  
   
   .clock {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
   }
 
   .Deadline-input {
-    height: 2.5rem;
-    font-size: 1.2rem !important;
+    height: 3.4rem;
+    font-size: 1.5rem !important;
     max-width: 70%;
   }
 
   .timer-input {
-    width: 4rem !important;
-    height: 3rem;
-    font-size: 1.5rem !important;
+    width: 4.5rem !important;
+    height: 4.5rem;
+    font-size: 2.5rem !important;
   }
 
  }

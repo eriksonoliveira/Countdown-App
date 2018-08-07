@@ -42,7 +42,7 @@ class Stopwatch extends Component {
     }
   }
 
-  stop() {
+  reset() {
     if(this.timer != null) {
       //stop this.timer
       clearInterval(this.timer);
@@ -72,7 +72,7 @@ class Stopwatch extends Component {
           {this.leading0(this.state.deciseconds)}
         </div>
         <Button className="margin-right timer-btn" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
-        <Button className="timer-btn" onClick={() => this.stop()}>Reset</Button>
+        <Button className="timer-btn" onClick={() => this.reset()}>Reset</Button>
       </div>
     );
   }

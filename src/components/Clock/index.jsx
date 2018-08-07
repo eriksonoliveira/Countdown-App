@@ -12,6 +12,8 @@ class Clock extends Component {
       minutes: 0,
       seconds: 0
     }
+
+    this.timer = null;
   }
 
   componentWillMount() {
@@ -19,8 +21,12 @@ class Clock extends Component {
   }
 
   componentDidMount() {
-    setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
+    this.timer = setInterval(() => this.getTimeUntil(this.props.deadline), 1000);
     //After the first run, run the method again every second
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   leading0(num) {
