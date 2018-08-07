@@ -24,42 +24,62 @@ class Timer extends Component {
     this.cancel = this.cancel.bind(this);
     this.handleChangeForm = this.handleChangeForm.bind(this);
     this.handleStartTimer = this.handleStartTimer.bind(this);
+    
+    this.timer = null;
   }
 
-  componentWillMount() {
-    this.getTimeUntilZero(this.state.time, this.state.endTime);
-  }
 
-  componentDidMount() {
-    //After the first run, run the method again every second
-    setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 1000);
-  }
+  // componentWillMount() {
+  //   this.getTimeUntilZero(this.state.time, this.state.endTime);
+  // }
 
-  //Handle change in form
+  // componentDidMount() {
+  //   //After the first run, run the method again every second
+  //   setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 1000);
+  // }
+
+  //Handle change in form, setting the minutes and seconds
   handleChangeForm(evt) {
-    this.setState({[evt.target.name]: evt.target.value});
+    this.setState({
+      [evt.target.name]: evt.target.value}, 
+      () => this.setState({ 
+        time: (this.state.min*60 + Number(this.state.sec))*1000,
+        seconds: this.state.sec,
+        minutes: this.state.min
+      })
+    );
   }
 
   /*convert minutes and seconds to milliseconds,
   add that to current time and save the sum to the state as endTime*/
   handleStartTimer() {
-    this.setState({
-      time: (this.state.min*60 + Number(this.state.sec))*1000
-    }, () => {
-      const endTime = new Date().getTime() + this.state.time;
-      this.setState({endTime});
-    });
+    // Show progress bar and clock
     this.showClock();
-  }
+    //  get endTime and start counting down
+    setTimeout(() => {
+        const endTime = new Date().getTime() + this.state.time;
+        this.setState(
+          { endTime }, 
+          () => {
+            this.timer = setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 100);
+        });
+      } 
+      ,500);
+      }
 
   leading0(num) {
-    return num < 10 ? '0' + num : num; //Using ternary expression to shorten conditional
+    return num < 10 ? '0' + num : num;
   }
 
   getTimeUntilZero(time, endTime) {
     const currTime = new Date().getTime();
     const timeDiff = endTime - currTime;
-    const percentage = Math.floor( (1 - (timeDiff / time)) * 100);
+
+    // Rounding down the number of seconds by using Math.floor
+    // creates an issue with the progress bar's synchronization
+    // The bar would always be behind by ~ 1 sec.
+    // thus, the progress bar percentage was advanced in one sec in the code below
+    const percentage = Math.floor( (1 - ((timeDiff - 1000) / time)) * 100);
 
     if(timeDiff > 0) {
 
@@ -68,7 +88,8 @@ class Timer extends Component {
 
       this.setState({minutes, seconds, percentage});
     } else {
-      this.setState({minutes: 0, seconds: 0, percentage});
+      this.setState({minutes: 0, seconds: 0, percentage: 100});
+      clearInterval(this.timer);
     }
   }
 
@@ -86,7 +107,8 @@ class Timer extends Component {
 
   cancel() {
     const currTime = new Date().getTime();
-    this.setState({minutes: 0, seconds: 0, min: 0, sec: 0, endTime: currTime});
+    this.setState({minutes: 0, seconds: 0, min: 0, sec: 0, endTime: currTime, percentage: 0});
+    clearInterval(this.timer);
     this.hideClock();
   }
 
@@ -109,7 +131,7 @@ class Timer extends Component {
           <div className="progressBar">
             <CircularProgressbar 
               percentage={this.state.percentage}
-              strokeWidth={4}
+              strokeWidth={3}
               textForPercentage={null}
             />
           </div>

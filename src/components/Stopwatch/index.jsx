@@ -10,7 +10,7 @@ class Stopwatch extends Component {
     this.state = {
       minutes :0,
       seconds :0,
-      milliseconds: 0,
+      deciseconds: 0,
       t: 0,
       buttonLabel: 'Start'
     }
@@ -27,17 +27,18 @@ class Stopwatch extends Component {
     } else {
 
       this.timer = setInterval(() => {
-        let t = this.state.t;
-        t += 1;
+        let { t } = this.state;
+        t++;
 
-        const milliseconds = Math.floor(t % 10);
-        const seconds = Math.floor((t/10) % 60);
-        const minutes = Math.floor(t/(10 * 60));
+        const deciseconds = Math.floor(t % 100);
+        const seconds = Math.floor((t/100) % 60);
+        const minutes = Math.floor(t/(100 * 60));
 
-        const buttonLabel = 'Stop';
-
-        this.setState({t, milliseconds, seconds, minutes, buttonLabel});
-      }, 100);
+        
+        this.setState({t, deciseconds, seconds, minutes});
+      }, 10);
+      const buttonLabel = 'Stop';
+      this.setState({buttonLabel});
     }
   }
 
@@ -48,16 +49,16 @@ class Stopwatch extends Component {
       this.timer = null;
     }
 
-    const milliseconds = 0;
+    const deciseconds = 0;
     const seconds = 0;
     const minutes = 0;
     const t = 0;
 
-    this.setState({t, milliseconds, seconds, minutes});
+    this.setState({t, deciseconds, seconds, minutes});
   }
 
   leading0(num) {
-    return num < 10 ? '0' + num : num; //Using ternary expression to shorten conditional
+    return num < 10 ? '0' + num : num;
   }
 
   render() {
@@ -68,7 +69,7 @@ class Stopwatch extends Component {
           :
           {this.leading0(this.state.seconds)}
           :
-          {this.state.milliseconds}
+          {this.leading0(this.state.deciseconds)}
         </div>
         <Button className="margin-right timer-btn" onClick={() => this.start()}>{this.state.buttonLabel}</Button>
         <Button className="timer-btn" onClick={() => this.stop()}>Reset</Button>
