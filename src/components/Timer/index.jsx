@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import '../../App.css';
-import '../../progressBar.css';
-import { Form, FormControl, Button } from 'react-bootstrap';
-import CircularProgressbar from 'react-circular-progressbar';
+import "../../progressBar.css";
+import { Form, FormControl, Button } from "react-bootstrap";
+import CircularProgressbar from "react-circular-progressbar";
 
 class Timer extends Component {
   constructor(props) {
@@ -17,36 +16,31 @@ class Timer extends Component {
       endTime: 0,
       percentage: 0,
       clockRunning: false
-    }
+    };
 
     this.showClock = this.showClock.bind(this);
     this.hideClock = this.hideClock.bind(this);
     this.cancel = this.cancel.bind(this);
     this.handleChangeForm = this.handleChangeForm.bind(this);
     this.handleStartTimer = this.handleStartTimer.bind(this);
-    
+
     this.timer = null;
   }
 
-
-  // componentWillMount() {
-  //   this.getTimeUntilZero(this.state.time, this.state.endTime);
-  // }
-
-  // componentDidMount() {
-  //   //After the first run, run the method again every second
-  //   setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 1000);
-  // }
+  componentWillUnmount() {}
 
   //Handle change in form, setting the minutes and seconds
   handleChangeForm(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value}, 
-      () => this.setState({ 
-        time: (this.state.min*60 + Number(this.state.sec))*1000,
-        seconds: this.state.sec,
-        minutes: this.state.min
-      })
+    this.setState(
+      {
+        [evt.target.name]: evt.target.value
+      },
+      () =>
+        this.setState({
+          time: (this.state.min * 60 + Number(this.state.sec)) * 1000,
+          seconds: this.state.sec,
+          minutes: this.state.min
+        })
     );
   }
 
@@ -57,105 +51,119 @@ class Timer extends Component {
     this.showClock();
     //  get endTime and start counting down
     setTimeout(() => {
-        const endTime = new Date().getTime() + this.state.time;
-        this.setState(
-          { endTime }, 
-          () => {
-            this.timer = setInterval(() => this.getTimeUntilZero(this.state.time, this.state.endTime), 100);
-        });
-      } 
-      ,500);
-      }
+      const endTime = new Date().getTime() + this.state.time;
+      this.setState({ endTime }, () => {
+        this.timer = setInterval(
+          () => this.getTimeUntilZero(this.state.time, this.state.endTime),
+          100
+        );
+      });
+    }, 500);
+  }
 
   leading0(num) {
-    return num < 10 ? '0' + num : num;
+    return num < 10 ? "0" + num : num;
   }
 
   getTimeUntilZero(time, endTime) {
     const currTime = new Date().getTime();
     const timeDiff = endTime - currTime;
 
-    // Rounding down the number of seconds by using Math.floor
-    // creates an issue with the progress bar's synchronization
-    // The bar would always be behind by ~ 1 sec.
-    // thus, the progress bar percentage was advanced in one sec in the code below
-    const percentage = Math.floor( (1 - ((timeDiff - 1000) / time)) * 100);
+    // The progress bar will only reach 100 when timeDiff reaches 0
+    // However, the timer shows only minutes and seconds.
+    // Thus, when the time left (timeDiff) is 0.999s or less
+    // the timer would've already reached 00:00
+    // and the bar would be behind by ~ 1 sec.
+    // Therefore, the progress bar percentage was advanced in one sec in the code below (timeDiff - 1000)
+    const percentage = (1 - (timeDiff - 1000) / time) * 100;
 
-    if(timeDiff > 0) {
+    if (timeDiff > 0) {
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+      const minutes = Math.floor(timeDiff / (1000 * 60));
 
-      const seconds = Math.floor((timeDiff/1000) % 60);
-      const minutes = Math.floor(timeDiff/(1000 * 60));
-
-      this.setState({minutes, seconds, percentage});
+      this.setState({ minutes, seconds, percentage });
     } else {
-      this.setState({minutes: 0, seconds: 0, percentage: 100});
+      this.setState({ minutes: 0, seconds: 0, percentage: 100 });
       clearInterval(this.timer);
     }
   }
 
   showClock() {
-      this.setState({
-        clockRunning: true
-      });
+    this.setState({
+      clockRunning: true
+    });
   }
 
   hideClock() {
-      this.setState({
-        clockRunning: false
-      });
+    this.setState({
+      clockRunning: false
+    });
   }
 
   cancel() {
     const currTime = new Date().getTime();
-    this.setState({minutes: 0, seconds: 0, min: 0, sec: 0, endTime: currTime, percentage: 0});
+    this.setState({
+      minutes: 0,
+      seconds: 0,
+      min: 0,
+      sec: 0,
+      endTime: currTime,
+      percentage: 0
+    });
     clearInterval(this.timer);
     this.hideClock();
   }
 
   render() {
-    return(
+    return (
       <div className="margin-top">
-      {
-          this.state.clockRunning ? 
-        <div className="timer-clock">
-          <div className="timer-clock-content">
-            <div className="clock-minutes">
-              {this.leading0(this.state.minutes)}
+        {this.state.clockRunning ? (
+          <div className="timer-clock">
+            <div className="timer-clock-content">
+              <div className="clock-minutes">
+                {this.leading0(this.state.minutes)}
+              </div>
+              :
+              <div className="clock-seconds">
+                {this.leading0(this.state.seconds)}
+              </div>
+              <Button
+                className="cancelTimer timer-btn"
+                onClick={() => this.cancel()}
+              >
+                Cancel
+              </Button>
             </div>
-            :
-            <div className="clock-seconds">
-              {this.leading0(this.state.seconds)}
+            <div className="progressBar">
+              <CircularProgressbar
+                percentage={this.state.percentage}
+                strokeWidth={3}
+                textForPercentage={null}
+              />
             </div>
-            <Button className="cancelTimer timer-btn" onClick={() => this.cancel()}>Cancel</Button>
           </div>
-          <div className="progressBar">
-            <CircularProgressbar 
-              percentage={this.state.percentage}
-              strokeWidth={3}
-              textForPercentage={null}
+        ) : (
+          <Form>
+            <FormControl
+              className="timer-input margin-right min"
+              placeholder={this.leading0(this.state.minutes)}
+              name="min"
+              onChange={event => this.handleChangeForm(event)}
             />
-          </div>
-        </div>
-        : null
-      }
-
-      {
-        this.state.clockRunning ? null
-        :
-        <Form>
-          <FormControl  className='timer-input margin-right min'
-            placeholder={this.leading0(this.state.minutes)}
-            name="min"
-            onChange={event => this.handleChangeForm(event)}
+            <FormControl
+              className="timer-input sec"
+              placeholder={this.leading0(this.state.seconds)}
+              name="sec"
+              onChange={event => this.handleChangeForm(event)}
             />
-          <FormControl  className='timer-input sec'
-          placeholder={this.leading0(this.state.seconds)}
-          name="sec"
-          onChange={event => this.handleChangeForm(event)}
-          />
-          <Button className="startTimer timer-btn" onClick={() => this.handleStartTimer()}>Start</Button>
-        </Form>
-      }
+            <Button
+              className="startTimer timer-btn"
+              onClick={() => this.handleStartTimer()}
+            >
+              Start
+            </Button>
+          </Form>
+        )}
       </div>
     );
   }
