@@ -5,13 +5,11 @@ import Timer from "./Timer/index";
 import Stopwatch from "./Stopwatch/index";
 import Tabs from "./Tabs";
 
-// import '../App.css';
-// import video from '../videos/bg-video.mp4';
 import { Grid } from "react-bootstrap";
 
 const Main = props => {
   return (
-    <div className={`content-wrap`}>
+    <div className="content-wrap">
       <Grid className="App">
         {/* Tabs Component */}
         <Tabs active={props.active} handleChange={props.handleChangeTab}>
@@ -31,28 +29,17 @@ const Main = props => {
           ) : null}
 
           {props.active === "timer" ? (
-            <div key="timer" className="timer mt-3">
-              <Timer
-                time={props.time}
-                endTime={props.endTime}
-                handleChangeForm={props.handleChangeForm}
-                handleStartTimer={props.handleStartTimer}
-              />
-            </div>
+            <Timer
+              time={props.time}
+              endTime={props.endTime}
+              handleChangeForm={props.handleChangeForm}
+              handleStartTimer={props.handleStartTimer}
+            />
           ) : null}
 
-          {props.active === "stopwatch" ? (
-            <div key="stopwatch" className="stopwatch mt-3">
-              <Stopwatch />
-            </div>
-          ) : null}
+          {props.active === "stopwatch" ? <Stopwatch /> : null}
         </div>
       </Grid>
-
-      {/* <video autoPlay muted loop id="bgVideo">*/}
-      {/* <source src="https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4"/> */}
-      {/*<source src={video}/>
-        </video> */}
     </div>
   );
 };

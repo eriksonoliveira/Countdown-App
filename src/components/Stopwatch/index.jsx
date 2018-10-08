@@ -12,7 +12,7 @@ class Stopwatch extends Component {
       seconds: 0,
       deciseconds: 0,
       t: 0,
-      buttonLabel: "Start"
+      buttonLabel: "START"
     };
 
     this.timer = null;
@@ -30,7 +30,7 @@ class Stopwatch extends Component {
       // stop this.timer
       clearInterval(this.timer);
       this.timer = null;
-      this.setState({ buttonLabel: "resume" });
+      this.setState({ buttonLabel: "RESUME" });
     } else {
       this.timer = setInterval(() => {
         let { t } = this.state;
@@ -42,7 +42,7 @@ class Stopwatch extends Component {
 
         this.setState({ t, deciseconds, seconds, minutes });
       }, 10);
-      this.setState({ buttonLabel: "stop" });
+      this.setState({ buttonLabel: "STOP" });
     }
   }
 
@@ -58,7 +58,7 @@ class Stopwatch extends Component {
       deciseconds: 0,
       seconds: 0,
       minutes: 0,
-      buttonLabel: "Start"
+      buttonLabel: "START"
     });
   }
 
@@ -68,7 +68,7 @@ class Stopwatch extends Component {
 
   render() {
     return (
-      <div>
+      <div key="stopwatch" className="stopwatch mt-3">
         <div className="stopwatch-time">
           {this.leading0(this.state.minutes)}:
           {this.leading0(this.state.seconds)}:
@@ -84,7 +84,7 @@ class Stopwatch extends Component {
           className="timer-btn stopwatch-reset"
           onClick={this.handleClickReset}
         >
-          Reset
+          RESET
         </Button>
       </div>
     );

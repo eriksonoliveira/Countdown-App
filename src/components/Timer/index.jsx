@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import "../../progressBar.css";
-import { Form, FormControl, Button } from "react-bootstrap";
 import CircularProgressbar from "react-circular-progressbar";
 
 class Timer extends Component {
@@ -116,23 +115,19 @@ class Timer extends Component {
 
   render() {
     return (
-      <div className="margin-top">
+      <div className="timer margin-top">
         {this.state.clockRunning ? (
           <div className="timer-clock">
-            <div className="timer-clock-content">
-              <div className="clock-minutes">
-                {this.leading0(this.state.minutes)}
+            <div className="timer-clock-text">
+              <div className="clock-text-wrap">
+                <span className="clock-minutes">
+                  {this.leading0(this.state.minutes)}
+                </span>
+                :
+                <span className="clock-seconds">
+                  {this.leading0(this.state.seconds)}
+                </span>
               </div>
-              :
-              <div className="clock-seconds">
-                {this.leading0(this.state.seconds)}
-              </div>
-              <Button
-                className="cancelTimer timer-btn"
-                onClick={() => this.cancel()}
-              >
-                Cancel
-              </Button>
             </div>
             <div className="progressBar">
               <CircularProgressbar
@@ -141,28 +136,42 @@ class Timer extends Component {
                 textForPercentage={null}
               />
             </div>
+            <button className="timer-cancel-btn" onClick={() => this.cancel()}>
+              Back
+            </button>
           </div>
         ) : (
-          <Form>
-            <FormControl
-              className="timer-input margin-right min"
+          <form className="timer-form">
+            <label htmlFor="timer-input-minutes" className="sr-only">
+              Minutes
+            </label>
+            <input
+              id="timer-input-minutes"
+              type="text"
+              className="timer-input min mr-1"
               placeholder={this.leading0(this.state.minutes)}
               name="min"
               onChange={event => this.handleChangeForm(event)}
             />
-            <FormControl
+            <label htmlFor="timer-input-seconds" className="sr-only">
+              Seconds
+            </label>
+            <input
+              id="timer-input-seconds"
+              type="text"
               className="timer-input sec"
               placeholder={this.leading0(this.state.seconds)}
               name="sec"
               onChange={event => this.handleChangeForm(event)}
             />
-            <Button
-              className="startTimer timer-btn"
+            <button
+              type="button"
+              className="timer-start-button"
               onClick={() => this.handleStartTimer()}
             >
               Start
-            </Button>
-          </Form>
+            </button>
+          </form>
         )}
       </div>
     );
