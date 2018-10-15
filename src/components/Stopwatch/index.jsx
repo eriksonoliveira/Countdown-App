@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TimeElapsed from "./TimeElapsed";
 
 import "../../App.css";
 import { Button } from "react-bootstrap";
@@ -8,9 +9,6 @@ class Stopwatch extends Component {
     super(props);
 
     this.state = {
-      minutes: 0,
-      seconds: 0,
-      deciseconds: 0,
       t: 0,
       buttonLabel: "START"
     };
@@ -18,6 +16,7 @@ class Stopwatch extends Component {
     this.timer = null;
     this.handleClickStartStop = this.handleClickStartStop.bind(this);
     this.handleClickReset = this.handleClickReset.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentWillUnmount() {
@@ -30,20 +29,43 @@ class Stopwatch extends Component {
       // stop this.timer
       clearInterval(this.timer);
       this.timer = null;
+
+      // Update button label
       this.setState({ buttonLabel: "RESUME" });
     } else {
-      this.timer = setInterval(() => {
-        let { t } = this.state;
-        t++;
+      // this.timer = setInterval(() => {
+      //   let { t } = this.state;
+      //   t++;
 
-        const deciseconds = Math.floor(t % 100);
-        const seconds = Math.floor((t / 100) % 60);
-        const minutes = Math.floor(t / (100 * 60));
+      //   const deciseconds = Math.floor(t % 100);
+      //   const seconds = Math.floor((t / 100) % 60);
+      //   const minutes = Math.floor(t / (100 * 60));
 
-        this.setState({ t, deciseconds, seconds, minutes });
-      }, 10);
+      //   this.setState((state) => {
+      //     return { t, deciseconds, seconds, minutes }
+      //   });
+      // }, 10);
+
+      this.startTime = Date.now();
+
+      this.timer = setInterval(this.update, 10);
+      // Update button label
       this.setState({ buttonLabel: "STOP" });
     }
+  }
+
+  update() {
+    let delta = Date.now() - this.startTime;
+    // console.log(this.state.t, delta);
+
+    // const drift = 10 - delta;
+    // delta += drift;
+    // console.log(delta, drift);
+    this.startTime = Date.now();
+
+    this.setState(state => {
+      return { t: state.t + delta };
+    });
   }
 
   handleClickReset() {
@@ -53,27 +75,18 @@ class Stopwatch extends Component {
       this.timer = null;
     }
 
-    this.setState({
-      t: 0,
-      deciseconds: 0,
-      seconds: 0,
-      minutes: 0,
-      buttonLabel: "START"
+    this.setState(state => {
+      return {
+        t: 0,
+        buttonLabel: "START"
+      };
     });
-  }
-
-  leading0(num) {
-    return num < 10 ? "0" + num : num;
   }
 
   render() {
     return (
       <div key="stopwatch" className="stopwatch mt-3">
-        <div className="stopwatch-time">
-          {this.leading0(this.state.minutes)}:
-          {this.leading0(this.state.seconds)}:
-          {this.leading0(this.state.deciseconds)}
-        </div>
+        <TimeElapsed timeElapsed={this.state.t} />
         <Button
           className="margin-right stopwatch-start"
           onClick={this.handleClickStartStop}
