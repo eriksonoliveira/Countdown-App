@@ -37,6 +37,7 @@ input[type="text"]:focus {
 
 .container {
   padding: 0 !important;
+  position: relative;
 }
 
 #root,
@@ -299,5 +300,12 @@ input[type="text"]:focus {
   .timer-input,
   .timer-clock-text {
     font-size: 3.6rem !important;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  html,
+  body {
+    height: 130vh;
   }
 }
