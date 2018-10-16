@@ -1,25 +1,27 @@
 import React from "react";
 
 const Tabs = props => {
+  const tabs = ["Countdown", "Timer", "Stopwatch"];
   return (
-    <div className="Tabs d-flex justify-content-around">
-      {// render the children
-      // First argument of 'React.Children.map' is the children array and the second, the callback function
-      // Documentation: https://reactjs.org/docs/react-api.html#reactchildren
-      React.Children.map(props.children, child => {
-        let className = "tab";
-        // Add class 'tab-active' to the active tab
-        className += child.key === props.active ? " tab-active" : "";
+    <div className="tabs">
+      <div className="tabs-inner container">
+        {tabs.map(tab => {
+          let className = `tab ${tab}`;
 
-        return (
-          <div
-            className={className}
-            onClick={() => props.handleChange(child.key)}
-          >
-            {child}
-          </div>
-        );
-      })}
+          className += tab === props.active ? " tab-active" : "";
+
+          return (
+            <div
+              className={className}
+              onClick={() => props.handleChange(tab)}
+              key={tab}
+            >
+              {tab.toUpperCase()}
+            </div>
+          );
+        })}
+        <div className={`indicator ${props.active}`} />
+      </div>
     </div>
   );
 };

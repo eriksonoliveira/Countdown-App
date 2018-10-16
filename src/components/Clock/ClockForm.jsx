@@ -1,22 +1,23 @@
 import React from "react";
-import { Form, FormControl, Button } from "react-bootstrap";
 
 const ClockForm = props => {
   return (
-    <Form inline bsClass="d-flex justify-content-center">
-      <FormControl
-        className="Deadline-input"
-        placeholder="new date"
+    <form className="d-flex justify-content-center">
+      <input
+        type="text"
+        className="deadline-input"
+        placeholder="New date"
         name="newDeadline"
         onChange={event => props.handleChangeForm(event)}
       />
-      <Button
+      <button
         className="clock-btn"
+        type="button"
         onClick={() => props.handleChangeDeadline()}
       >
-        Change
-      </Button>
-    </Form>
+        CHANGE
+      </button>
+    </form>
   );
 };
 

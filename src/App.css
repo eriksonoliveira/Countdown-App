@@ -3,81 +3,120 @@ html {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  font-family: "Roboto", sans-serif !important;
+}
+
+button {
+  background-color: #3e7dd2;
+  color: #fff;
+  font-weight: 600;
+  border: 0;
+  border-radius: 3px !important;
+  transition: all 0.2s;
+}
+
+button:hover {
+  box-shadow: 0 1px 3px 1px rgb(129, 129, 129);
+}
+
+input[type="text"] {
+  border: 1px solid #888 !important;
+  border-radius: 4px;
+  color: #111 !important;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+input[type="text"]:hover {
+  border: 1px solid #3d3d3d !important;
+}
+
+input[type="text"]:focus {
+  border: 2px solid #3d3d3d !important;
 }
 
 #root,
 .content-wrap {
   width: inherit;
   height: inherit;
-  display: flex;
-  align-items: center;
 }
 
 .content-wrap {
   transition: 0.6s;
-  background-color: #3e7dd2;
-  height: 100%;
-  width: 100%;
   overflow: hidden;
   position: relative;
-}
-
-video {
-  display: none;
-}
-
-#bgVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  overflow: hidden;
-  background-size: cover;
 }
 
 .App {
   height: 350px;
   text-align: center;
-  font-size: 3.8rem;
   color: #dddddd;
-  text-shadow: 2px 2px 3px #555;
   z-index: 100;
 }
 
-.Tabs {
-  text-align: center;
+.tabs {
+  position: relative;
+  padding-top: 3rem;
+  background-color: #3e7dd2;
+  box-shadow: 0px 0 5px 1px rgb(129, 129, 129);
+}
+
+.tabs-inner {
+  width: inherit;
+}
+
+.indicator {
+  width: 33.33%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  transition: left cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.indicator.Timer {
+  left: 33.33%;
+}
+
+.indicator.Countdown {
+  left: 0;
+}
+
+.indicator.Stopwatch {
+  left: 66.66%;
 }
 
 .tab {
-  cursor: pointer;
-  margin: 0 25px;
-  padding: 5px 10px;
-  border-radius: 3px;
-  transition: all 0.2s;
-  font-weight: bold;
+  width: 33.33%;
   display: inline-block;
+  height: 6rem;
+  line-height: 6rem;
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: rgba(250, 250, 250, 0.5);
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .tab:hover {
-  background-color: rgba(150, 150, 150, 0.4);
+  background-color: rgba(81, 138, 214, 0.5);
 }
 
 .tab-active {
-  background-color: rgba(221, 221, 221, 0.4);
-  border: 1px solid #333;
-  transform: scale(1.1);
   color: #fff;
 }
 
 .tab-active:hover {
-  background-color: rgba(221, 221, 221, 0.4);
+  background-color: rgba(81, 138, 214, 0.5);
+}
+
+.content {
+  color: #222;
+  font-size: 1.5rem;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2.2em;
 }
 
 .margin-top {
@@ -96,21 +135,11 @@ video {
   margin: 10px;
 }
 
-input {
-  background-color: rgba(221, 221, 221, 0.7) !important;
-  border: 1px solid #333 !important;
-  color: #222 !important;
-}
-
-button {
-  font-size: 1.5rem !important;
-  border: 1px solid #333 !important;
-}
-
-.Deadline-input {
+.deadline-input {
   height: 4.5rem;
   font-size: 2rem !important;
   padding-left: 1.5rem !important;
+  margin-right: 3px;
 }
 
 .timer-input {
@@ -122,37 +151,35 @@ button {
   padding: 5px 0;
 }
 
+.timer-input,
+.timer-clock-text {
+  font-size: 3.7rem !important;
+}
+
 ::placeholder {
   color: rgb(107, 107, 107) !important;
   opacity: 1 !important;
-  text-shadow: 2px 2px 3px #ddd;
 }
 
 ::-moz-placeholder {
   color: rgb(107, 107, 107) !important;
   opacity: 1 !important;
-  text-shadow: 2px 2px 3px #ddd;
 }
 
 :-moz-placeholder {
   color: rgb(107, 107, 107) !important;
   opacity: 1 !important;
-  text-shadow: 2px 2px 3px #ddd;
 }
 
 :-ms-input-placeholder {
   color: rgb(107, 107, 107) !important;
-  text-shadow: 2px 2px 3px #ddd;
 }
 
 ::-ms-input-placeholder {
   color: rgb(107, 107, 107) !important;
-  text-shadow: 2px 2px 3px #ddd;
 }
 
 .timer-clock {
-  /* width: 250px;
-  height: 250px; */
   margin: auto;
   display: flex;
   justify-content: center;
@@ -179,22 +206,13 @@ button {
 .timer-cancel-btn {
   display: block !important;
   margin: auto;
-  /* color: rgb(212, 0, 0); */
   padding: 8px 35px !important;
-  /* background-color: transparent; */
-  /* border: 2px solid rgb(212, 0, 0) !important; */
-  color: rgb(212, 0, 0);
   position: absolute;
   bottom: -25%;
 }
 
-/* .timer-cancel-btn:hover {
-  color: white;
-} */
-
 .timer-start-button {
   padding: 10px 90px !important;
-  color: green;
   display: block;
   font-size: 1.8rem;
   margin: 4rem auto 0 auto;
@@ -216,61 +234,66 @@ button {
   padding: 8px 35px !important;
 }
 
+.stopwatch-reset,
+.timer-cancel-btn {
+  background-color: transparent;
+  color: #3e7dd2;
+  border: 1px solid #3e7dd2;
+}
+
+.stopwatch-reset:hover,
+.timer-cancel-btn:hover {
+  background-color: rgba(62, 125, 210, 0.1);
+  box-shadow: none;
+}
+
 /*On medium screens*/
 @media only screen and (min-width: 570px) and (max-width: 768px) {
-  .App {
-    font-size: 2rem;
+  html {
+    font-size: 12px;
   }
 
   .tab {
-    margin: 0 2px;
+    font-size: 1.7rem;
   }
 }
 
 /*On small screens*/
 @media only screen and (max-width: 570px) {
-  #root,
-  .content-wrap {
-    align-items: start;
+  html {
+    font-size: 10px;
   }
 
-  .content-wrap {
-    padding-top: 30px;
-  }
-
-  .App {
-    font-size: 1.7rem;
+  .tab {
+    font-size: 1.5rem;
   }
 
   button {
     font-size: 1.5rem !important;
   }
 
-  .tab {
-    margin: 0 5px;
-  }
-
   .section-title {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 
   .clock {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     margin-bottom: 2rem;
   }
 
-  .Deadline-input {
+  .deadline-input {
     height: 3.4rem;
-    font-size: 1.5rem !important;
-    max-width: 70%;
+    font-size: 1.7rem !important;
+    max-width: 75%;
   }
 
   .timer-input {
-    width: 4.5rem !important;
+    width: 5.5rem !important;
+    padding: 10px 0;
   }
 
   .timer-input,
   .timer-clock-text {
-    font-size: 2.6rem !important;
+    font-size: 3.6rem !important;
   }
 }

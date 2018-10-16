@@ -18,7 +18,7 @@ class Timer extends Component {
     };
 
     this.showClock = this.showClock.bind(this);
-    this.hideClock = this.hideClock.bind(this);
+    // this.hideClock = this.hideClock.bind(this);
     this.cancel = this.cancel.bind(this);
     this.handleChangeForm = this.handleChangeForm.bind(this);
     this.handleStartTimer = this.handleStartTimer.bind(this);
@@ -82,22 +82,29 @@ class Timer extends Component {
 
       this.setState({ minutes, seconds, percentage });
     } else {
-      this.setState({ minutes: 0, seconds: 0, percentage: 100 });
+      this.setState({
+        minutes: 0,
+        seconds: 0,
+        percentage: 100,
+        clockRunning: false
+      });
       clearInterval(this.timer);
+      // setTimeout(this.hideClock, 2000);
     }
   }
 
   showClock() {
     this.setState({
-      clockRunning: true
+      clockRunning: true,
+      percentage: 0
     });
   }
 
-  hideClock() {
-    this.setState({
-      clockRunning: false
-    });
-  }
+  // hideClock() {
+  //   this.setState({
+  //     clockRunning: false
+  //   });
+  // }
 
   cancel() {
     const currTime = new Date().getTime();
@@ -107,10 +114,11 @@ class Timer extends Component {
       min: 0,
       sec: 0,
       endTime: currTime,
-      percentage: 0
+      percentage: 0,
+      clockRunning: false
     });
     clearInterval(this.timer);
-    this.hideClock();
+    // this.hideClock();
   }
 
   render() {
@@ -169,7 +177,7 @@ class Timer extends Component {
               className="timer-start-button"
               onClick={() => this.handleStartTimer()}
             >
-              Start
+              START
             </button>
           </form>
         )}

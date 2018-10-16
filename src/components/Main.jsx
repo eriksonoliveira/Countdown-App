@@ -5,22 +5,13 @@ import Timer from "./Timer/index";
 import Stopwatch from "./Stopwatch/index";
 import Tabs from "./Tabs";
 
-import { Grid } from "react-bootstrap";
-
 const Main = props => {
   return (
     <div className="content-wrap">
-      <Grid className="App">
-        {/* Tabs Component */}
-        <Tabs active={props.active} handleChange={props.handleChangeTab}>
-          <div key="countdown">Countdown</div>
-          <div key="timer">Timer</div>
-          <div key="stopwatch">Stopwatch</div>
-        </Tabs>
-
-        {/* Render Components according to props.active */}
+      <div className="App">
+        <Tabs active={props.active} handleChange={props.handleChangeTab} />
         <div className="content d-flex justify-content-center mt-5">
-          {props.active === "countdown" ? (
+          {props.active === "Countdown" ? (
             <Clock
               deadline={props.deadline}
               handleChangeDeadline={props.handleChangeDeadline}
@@ -28,7 +19,7 @@ const Main = props => {
             />
           ) : null}
 
-          {props.active === "timer" ? (
+          {props.active === "Timer" ? (
             <Timer
               time={props.time}
               endTime={props.endTime}
@@ -37,9 +28,9 @@ const Main = props => {
             />
           ) : null}
 
-          {props.active === "stopwatch" ? <Stopwatch /> : null}
+          {props.active === "Stopwatch" ? <Stopwatch /> : null}
         </div>
-      </Grid>
+      </div>
     </div>
   );
 };

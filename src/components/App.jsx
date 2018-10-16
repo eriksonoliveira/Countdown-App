@@ -15,7 +15,7 @@ class App extends Component {
       sec: 0,
       time: 0,
       endTime: 0,
-      active: "timer"
+      active: "Timer"
     };
 
     this.handleChangeTab = this.handleChangeTab.bind(this);
