@@ -35,6 +35,10 @@ input[type="text"]:focus {
   border: 2px solid #3d3d3d !important;
 }
 
+.container {
+  padding: 0 !important;
+}
+
 #root,
 .content-wrap {
   width: inherit;
