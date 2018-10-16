@@ -15,7 +15,7 @@ const ClockForm = props => {
         type="button"
         onClick={() => props.handleChangeDeadline()}
       >
-        CHANGE
+        &#10003;
       </button>
     </form>
   );

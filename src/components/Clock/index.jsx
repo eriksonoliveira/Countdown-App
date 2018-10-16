@@ -54,8 +54,8 @@ class Clock extends Component {
   render() {
     return (
       <div id="countdown" className="countdown content-inner mt-3">
-        <p className="section-title">Countdown to</p>
-        <p>{this.props.deadline}</p>
+        <p className="countdown-header">Countdown to</p>
+        <p className="countdown-date mt-5">{this.props.deadline}</p>
         <div className="clock">
           <span className="clock-days">
             {this.leading0(this.state.days)} days
