@@ -70,13 +70,17 @@ class Stopwatch extends Component {
       this.timer = null;
     }
 
-    this.setState(state => {
-      return {
-        t: 0,
-        buttonLabel: "START",
-        laps: []
-      };
-    });
+    this.setState(
+      state => {
+        return {
+          t: 0,
+          buttonLabel: "START",
+          prevLap: 0,
+          laps: []
+        };
+      },
+      () => (this.lapCount = 0)
+    );
   }
 
   addLap() {
